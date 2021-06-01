@@ -1,4 +1,4 @@
-module.exports = (x, y) => {
+const KaratsubaMultiply = (x, y) => {
   /**
    ** Karatsuba multiplication algorithm
    *@param x Nx digits number;
@@ -29,3 +29,5 @@ module.exports = (x, y) => {
   const middlePart = AplusBmultCplusD - ac - bd;
   return 10 ** (2 * n) * ac + 10 ** n * middlePart + bd;
 };
+
+module.exports = KaratsubaMultiply;
