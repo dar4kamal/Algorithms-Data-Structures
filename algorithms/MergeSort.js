@@ -1,25 +1,26 @@
-```
-const array = [23, 52, 1, 3, 7, 9, 4, 6, 94, 12, 35, 87];
-const defaultSort = (arr) => arr.sort((a, b) => a - b);
-const mergeArrays = (right, left) => {
-  const output = new Array();
+const _mergeSort = (right, left) => {
+  /**
+   * Merge Sort Sub Routine for Merging two arrays in a sorted one
+   */
+  let output = [];
   let i = 0;
   let j = 0;
-  while (j < left.length && i < right.length) {
-    if (right[i] > left[j]) {
-      output[k] = left[j];
-      j++;
-      console.log(output);
-      console.log({ item: arr[0], n, list: arr });
-      console.log({ right: arr.slice(0, n / 2), left: arr.slice(n / 2) });
-    } else {
-      output[k] = right[i];
+  while (i < left.length && j < right.length) {
+    if (right[j] > left[i]) {
+      output.push(left[i]);
       i++;
-      console.log(output);
-      console.log({ item: arr[0], n, list: arr });
-      console.log({ right: arr.slice(0, n / 2), left: arr.slice(n / 2) });
+    } else {
+      output.push(right[j]);
+      j++;
     }
   }
+  while (i < left.length) {
+    output.push(left[i++]);
+  }
+  while (j < right.length) {
+    output.push(right[j++]);
+  }
+
   return output;
 };
 const mergeSort = (arr) => {
@@ -39,19 +40,9 @@ const mergeSort = (arr) => {
   const n = arr.length;
   if (n == 1) return arr;
 
-  let output = [];
   const right = mergeSort(arr.slice(0, n / 2));
   const left = mergeSort(arr.slice(n / 2));
-
-  console.log({ item: arr[0], n, list: arr });
-  console.log({ right: arr.slice(0, n / 2), left: arr.slice(n / 2) });
+  return _mergeSort(right, left);
 };
 
-const merge = mergeSort(array);
-const sorted = defaultSort(array);
-console.log(sorted.length);
-console.log(merge.length);
-console.log(sorted);
-console.log(merge);
-
-```;
+module.exports = mergeSort;
