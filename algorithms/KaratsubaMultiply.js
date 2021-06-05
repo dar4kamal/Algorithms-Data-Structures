@@ -15,19 +15,21 @@ const KaratsubaMultiply = (x, y) => {
    */
   const xDigits = x.toString().split("").length;
   const yDigits = y.toString().split("").length;
-  const n = Math.min(xDigits, yDigits) - 1;
-  if (n == 0) return x * y;
+  if (xDigits == 1 && yDigits == 1) return x * y;
 
-  const a = Math.floor(x / 10 ** n);
-  const b = Math.floor(x % 10 ** n);
-  const c = Math.floor(y / 10 ** n);
-  const d = Math.floor(y % 10 ** n);
+  const n = Math.max(xDigits, yDigits);
+  const m = Math.ceil(n / 2);
+
+  const a = Math.floor(x / 10 ** m);
+  const b = Math.floor(x % 10 ** m);
+  const c = Math.floor(y / 10 ** m);
+  const d = Math.floor(y % 10 ** m);
 
   const ac = KaratsubaMultiply(a, c);
   const bd = KaratsubaMultiply(b, d);
   const AplusBmultCplusD = KaratsubaMultiply(a + b, c + d);
   const middlePart = AplusBmultCplusD - ac - bd;
-  return 10 ** (2 * n) * ac + 10 ** n * middlePart + bd;
+  return 10 ** (2 * m) * ac + 10 ** m * middlePart + bd;
 };
 
 module.exports = KaratsubaMultiply;
